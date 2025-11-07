@@ -26,6 +26,8 @@ This dataset includes:
 | `checkpoints/`   | Saved trained models | Saves the “learned brain” so training doesn’t restart |
 | `src/`           | Training / preprocessing scripts | The code that runs the experiments |
 
+🎯: Due to GitHub storage limitations, only two writers' handwriting samples are included in the `data` folder as an example.
+
 ---
 
 ## ✋ Why We Group Images by Writer
@@ -98,6 +100,8 @@ Check writer count:
 ```
 wc -l writers_shuffled.txt
 ```
+---
+### 3️⃣ Split the writers into training, validation, and test groups
 ```
 $all   = Get-Content .\writers_shuffled.txt
 $train = $all | Select-Object -First 333
@@ -108,14 +112,15 @@ $train | Set-Content .\train.list
 $val   | Set-Content .\val.list
 $test  | Set-Content .\test.list
 ```
-### 3️⃣ convert lists -> JSON:
+---
+### 4️⃣ Convert lists -> JSON
 ```
 New-Item -ItemType Directory -Path .\splits -Force | Out-Null
 (Get-Content .\train.list) | ConvertTo-Json > .\splits\train.json
 (Get-Content .\val.list)   | ConvertTo-Json > .\splits\val.json
 (Get-Content .\test.list)  | ConvertTo-Json > .\splits\test.json
 ```
-
+---
 ## 🧠 Training (ResNet18 Transfer Learning)
 
 We use:
