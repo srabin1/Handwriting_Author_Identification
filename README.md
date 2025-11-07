@@ -98,7 +98,7 @@ Check writer count:
 ```
 wc -l writers_shuffled.txt
 ```
-
+```
 $all   = Get-Content .\writers_shuffled.txt
 $train = $all | Select-Object -First 333
 $val   = $all | Select-Object -Skip 333 -First 71
@@ -107,8 +107,8 @@ $test  = $all | Select-Object -Skip 404
 $train | Set-Content .\train.list
 $val   | Set-Content .\val.list
 $test  | Set-Content .\test.list
-
-convert lists -> JSON:
+```
+### 3️⃣ convert lists -> JSON:
 ```
 New-Item -ItemType Directory -Path .\splits -Force | Out-Null
 (Get-Content .\train.list) | ConvertTo-Json > .\splits\train.json
@@ -120,14 +120,11 @@ New-Item -ItemType Directory -Path .\splits -Force | Out-Null
 
 We use:
 
-Grayscale → 3-channel replicate
+- Grayscale → 3-channel replicate
+- ImageNet normalization
+- Label smoothing
+- AdamW optimizer
 
-ImageNet normalization
-
-Label smoothing
-
-AdamW optimizer
-
-Training and inference code is located in: src/train_resnet_closedset.py
+### ✅ Training and inference code is located in: src/train_resnet_closedset.py
 
 ### ✅ Run the code: run CSAFE_Handwriting.ipynb 
