@@ -134,7 +134,7 @@ We use:
 1. Ensure the dataset is correctly arranged into data/writers/
 2. Ensure splits/*.json exist (see Data Preparation steps above)
 3. Training and inference code is located in: src/train_resnet_closedset.py
-4. Run the training notebook:
+4. Run the training notebook on Google Colab:
 
 Open and execute:
 CSAFE_Handwriting.ipynb
@@ -145,12 +145,12 @@ python src/train_resnet_closedset.py \
   --data_root data/writers \
   --splits_dir splits \
   --ckpt_dir checkpoints \
-  --epochs 12 \
+  --epochs 10-20 \
   --batch_size 32
 
 ---
 
-## ✅ Expected Accuracy (Closed-Set Writer Identification)
+## ✅ Expected Accuracy 
 
 | Model | Accuracy Range |
 |-------|----------------|
