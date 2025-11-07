@@ -129,3 +129,5 @@ Label smoothing
 AdamW optimizer
 
 Training and inference code is located in: src/train_resnet_closedset.py
+
+### ✅ Run the code: run CSAFE_Handwriting.ipynb 
