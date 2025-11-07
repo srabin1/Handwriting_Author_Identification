@@ -34,12 +34,9 @@ This dataset includes:
 
 All handwriting from the same writer must be grouped under a single writer ID (e.g., `w0001`).
 
-Example filename:  
-w0001_s03_pLN_D_r02.png
-^---- Writer ID (this is the class label)
+Example filename: w0001_s03_pLN_D_r02.png
 
-If images are not grouped by writer →  
-The model cannot learn each person’s characteristic handwriting patterns:  
+If images are not grouped by writer →  The model cannot learn each person’s characteristic handwriting patterns:  
 - Slant & curvature  
 - Stroke smoothness  
 - Letter formation habits  
