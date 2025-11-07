@@ -127,6 +127,34 @@ We use:
 - Label smoothing
 - AdamW optimizer
 
-### ✅ Training and inference code is located in: src/train_resnet_closedset.py
+  ---
 
-### ✅ Run the code: run CSAFE_Handwriting.ipynb 
+## 🚀 How to Train the Model
+
+1. Ensure the dataset is correctly arranged into data/writers/
+2. Ensure splits/*.json exist (see Data Preparation steps above)
+3. Training and inference code is located in: src/train_resnet_closedset.py
+4. Run the training notebook:
+
+Open and execute:
+CSAFE_Handwriting.ipynb
+
+or run the training script directly:
+
+python src/train_resnet_closedset.py \
+  --data_root data/writers \
+  --splits_dir splits \
+  --ckpt_dir checkpoints \
+  --epochs 12 \
+  --batch_size 32
+
+---
+
+## ✅ Expected Accuracy (Closed-Set Writer Identification)
+
+| Model | Accuracy Range |
+|-------|----------------|
+| Small CNN (baseline) | ~5–15% |
+| **ResNet18 Transfer Learning (recommended)** | **70–90%** depending on training duration and dataset size
+
+
