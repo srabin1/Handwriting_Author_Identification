@@ -84,4 +84,48 @@ for f in data/AllHandwritingImages/*.png; do
   mkdir -p "data/writers/$writer"
   mv "$f" "data/writers/$writer/"
 done
+```
+---
+### 2️⃣ Shuffle writers & create splits (PowerShell on Windows)
+```
+Get-ChildItem .\data\writers -Directory |
+  Select-Object -ExpandProperty Name |
+  Sort-Object { Get-Random } |
+  Set-Content .\writers_shuffled.txt
+```
 
+Check writer count:
+```
+wc -l writers_shuffled.txt
+```
+
+$all   = Get-Content .\writers_shuffled.txt
+$train = $all | Select-Object -First 333
+$val   = $all | Select-Object -Skip 333 -First 71
+$test  = $all | Select-Object -Skip 404
+
+$train | Set-Content .\train.list
+$val   | Set-Content .\val.list
+$test  | Set-Content .\test.list
+
+convert lists -> JSON:
+```
+New-Item -ItemType Directory -Path .\splits -Force | Out-Null
+(Get-Content .\train.list) | ConvertTo-Json > .\splits\train.json
+(Get-Content .\val.list)   | ConvertTo-Json > .\splits\val.json
+(Get-Content .\test.list)  | ConvertTo-Json > .\splits\test.json
+```
+
+## 🧠 Training (ResNet18 Transfer Learning)
+
+We use:
+
+Grayscale → 3-channel replicate
+
+ImageNet normalization
+
+Label smoothing
+
+AdamW optimizer
+
+Training and inference code is located in: src/train_resnet_closedset.py
